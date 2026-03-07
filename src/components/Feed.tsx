@@ -2,7 +2,8 @@
 
 import { useDispatch , useSelector} from "react-redux";
 import { setFeed } from "../features/feedSlice";
-import { RootState } from "../store/store";
+import { RootState, AppDispatch} from "../store/store";
+import { fetchNews } from "../services/newApi";
 
 export default function Feed() {
     const dispatch = useDispatch();
@@ -15,13 +16,27 @@ export default function Feed() {
         }]))
     }
 
+    const loadNews = async () => {
+
+        const articles = await fetchNews();
+
+        console.log("API response:", articles);
+
+        const formatted = articles.map((a: any, index: number) => ({
+            id: index,
+            title: a.title
+        }));
+
+        dispatch(setFeed(formatted));
+    };
+
     return (
         <div className="grid grid-cols-3 gap-6">
             <div className="border p-4 rounded">Content Card</div>
             <div className="border p-4 rounded">Content Card</div>
             <div className="border p-4 rounded">Content Card</div>
 
-            <button onClick={testFeed} className="border px-4 py-2"> 
+            <button onClick={loadNews} className="border px-4 py-2"> 
                 Load Test Feed
             </button>
 
