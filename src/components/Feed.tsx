@@ -8,6 +8,11 @@ import Card from "./Card";
 import { fetchMovies } from "../services/movieApi";
 import { fetchSocial } from "../services/socialApi";
 import { title } from "process";
+import { useEffect } from "react";
+
+function shuffleArray(array: any[]) {
+    return array.sort(() => Math.random() - 0.5);
+}
 
 export default function Feed() {
     const dispatch = useDispatch();
@@ -20,7 +25,11 @@ export default function Feed() {
         }]))
     }
 
-    const loadNews = async () => {
+    useEffect(() => {
+        loadContent();
+    }, []);
+
+    const loadContent = async () => {
 
         const articles = await fetchNews();
         const movies = await fetchMovies();
@@ -52,20 +61,15 @@ export default function Feed() {
         })
         )
 
-        dispatch(setFeed([...formattedNews, ...formattedMovies, ...formattedSocial]));
+        dispatch(setFeed(shuffleArray([...formattedNews, ...formattedMovies, ...formattedSocial])));
     };
 
     return (
         <div className="p-6">
 
-            <button onClick={loadNews} className="border px-4 py-2"> 
-                Load Test Feed
-            </button>
-
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-10">
                 {feed.map((item: any) => (
-                    <Card key={item.id} title={item.title} description={item.description} image={item.image} />
-                    
+                    <Card key={item.id} title={item.title} description={item.description} image={item.image} type={item.type} />
                 ))}
             </div>
         </div>
