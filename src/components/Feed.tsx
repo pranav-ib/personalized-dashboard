@@ -6,6 +6,8 @@ import { RootState, AppDispatch} from "../store/store";
 import { fetchNews } from "../services/newApi";
 import Card from "./Card";
 import { fetchMovies } from "../services/movieApi";
+import { fetchSocial } from "../services/socialApi";
+import { title } from "process";
 
 export default function Feed() {
     const dispatch = useDispatch();
@@ -22,10 +24,11 @@ export default function Feed() {
 
         const articles = await fetchNews();
         const movies = await fetchMovies();
+        const social = await fetchSocial();
      //   console.log("API response:", articles);
 
         const formattedNews = articles.map((a: any, index: number) => ({
-            id: index,
+            id: "news-" + index,
             title: a.title,
             description: a.description,
             image: a.urlToImage,
@@ -33,14 +36,23 @@ export default function Feed() {
         }));
 
         const formattedMovies = movies.map((a:any, index: number) => ({
-            id: index + 1000, // To avoid ID conflicts with news
+            id: "movie-" + index,
             title: a.title,
             description: a.overview,
             image: `https://image.tmdb.org/t/p/w500${a.poster_path}`,
             type: 'movie'
         }));
 
-        dispatch(setFeed([...formattedNews, ...formattedMovies]));
+        const formattedSocial = social.map((a:any, index: number) => ({
+            id: "social-" + index,
+            title: a.title,
+            description: a.body,
+            image: `https://via.placeholder.com/150`,
+            type: 'social'
+        })
+        )
+
+        dispatch(setFeed([...formattedNews, ...formattedMovies, ...formattedSocial]));
     };
 
     return (
