@@ -4,18 +4,5 @@ import Sidebar from "../components/Sidebar";
 import Favorites from "../components/Favorites";
 
 export default function Home() {
-  return (
-    <div className="flex">
-      <Sidebar />
-
-      <div className="flex-1">
-        <Navbar />
-
-        <main className="p-6">
-          <Feed />
-          <Favorites />
-        </main>
-      </div>
-    </div>
-  );
+  return <Feed />;
 }
