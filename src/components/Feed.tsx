@@ -18,7 +18,7 @@ export default function Feed() {
     const dispatch = useDispatch();
 
     const feed = useSelector((state: RootState) => state.feed.items);
-
+    const category = useSelector((state: RootState) => state.preferences.category);
     const testFeed = () =>{
         dispatch(setFeed([{
             id:1, title: "Test Post"
@@ -31,7 +31,7 @@ export default function Feed() {
 
     const loadContent = async () => {
 
-        const articles = await fetchNews();
+        const articles = await fetchNews(category);
         const movies = await fetchMovies();
         const social = await fetchSocial();
      //   console.log("API response:", articles);
