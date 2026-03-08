@@ -7,11 +7,7 @@ import { fetchNews } from "../services/newApi";
 import Card from "./Card";
 import { fetchMovies } from "../services/movieApi";
 import { fetchSocial } from "../services/socialApi";
-import { title } from "process";
 import { useEffect, useState } from "react";
-import Search from "./Search";
-import useDebounce from "../hooks/useDebounce";
-
 
 function shuffleArray(array: any[]) {
     return array.sort(() => Math.random() - 0.5);
@@ -19,11 +15,11 @@ function shuffleArray(array: any[]) {
 
 export default function Feed() {
     const dispatch = useDispatch();
-    const [query, setQuery]= useState("");
-    const debouncedQuery = useDebounce(query, 300);
 
     const feed = useSelector((state: RootState) => state.feed.items);
     const category = useSelector((state: RootState) => state.preferences.category);
+    const query = useSelector((state: RootState) => state.search.query);
+    
     const testFeed = () =>{
         dispatch(setFeed([{
             id:1, title: "Test Post"
@@ -70,27 +66,17 @@ export default function Feed() {
     };
 
     const filteredFeed = feed.filter((item:any) => 
-        item.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+        `${item.title} ${item.description}`.toLowerCase().includes(query.toLowerCase())
     );
 
     return (
-  <div className="p-6">
+        <div className="p-6">
 
-    <Search value={query} onChange={setQuery} />
-
-    <div className="grid grid-cols-3 gap-6">
-      {filteredFeed.map((item: any) => (
-        <Card
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          description={item.description}
-          image={item.image}
-          type={item.type}
-        />
-      ))}
-    </div>
-
-  </div>
-);
+            <div className="grid grid-cols-3 gap-10">
+                {filteredFeed.map((item: any) => (
+                    <Card key={item.id} id={item.id} title={item.title} description={item.description} image={item.image} type={item.type} />
+                ))}
+            </div>
+        </div>
+    );
 }
