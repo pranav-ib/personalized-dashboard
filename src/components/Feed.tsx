@@ -5,6 +5,7 @@ import { setFeed } from "../features/feedSlice";
 import { RootState, AppDispatch} from "../store/store";
 import { fetchNews } from "../services/newApi";
 import Card from "./Card";
+import { fetchMovies } from "../services/movieApi";
 
 export default function Feed() {
     const dispatch = useDispatch();
@@ -20,17 +21,26 @@ export default function Feed() {
     const loadNews = async () => {
 
         const articles = await fetchNews();
-
+        const movies = await fetchMovies();
      //   console.log("API response:", articles);
 
-        const formatted = articles.map((a: any, index: number) => ({
+        const formattedNews = articles.map((a: any, index: number) => ({
             id: index,
             title: a.title,
             description: a.description,
-            image: a.urlToImage
+            image: a.urlToImage,
+            type: 'news'
         }));
 
-        dispatch(setFeed(formatted));
+        const formattedMovies = movies.map((a:any, index: number) => ({
+            id: index + 1000, // To avoid ID conflicts with news
+            title: a.title,
+            description: a.overview,
+            image: `https://image.tmdb.org/t/p/w500${a.poster_path}`,
+            type: 'movie'
+        }));
+
+        dispatch(setFeed([...formattedNews, ...formattedMovies]));
     };
 
     return (
