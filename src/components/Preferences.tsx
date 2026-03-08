@@ -4,18 +4,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { setCategory } from "../features/preferenceSlice";
 
+const categories = ["general", "technology", "sports", "business", "entertainment", "health", "science"];
+
 export default function Preferences() {
 
     const dispatch = useDispatch();
-    const category = useSelector((state : RootState) => state.preferences.category);
+    const selected = useSelector((state : RootState) => state.preferences.categories);
 
     return (
-        <div className="mb-6">
-            <label className="mr-2 font-semibold">
-                News Category: 
+        <div className="mb-6 p-6">
+            <label className="text-2xl font-bold mb-4">
+                Preferences
             </label>
+            <div className="mt-4"></div> 
+            <div className="flex flex-wrap gap-3">
+                {categories.map((cat) => {
+                    const active = selected.includes(cat);
 
-            <select value={category}
+                    return (
+                        <button key={cat} onClick={() => dispatch(setCategory(cat))}
+                            className={`px-4 py-2 rounded-full border transition
+                            ${active
+                            ? "bg-purple-600 text-white border-purple-600"
+                            : "bg-white hover:bg-gray-100"}
+                        `}>
+                            {cat}
+                        </button>
+                    );
+        })}
+            </div>
+            
+
+    {/*        <select value={category}
                 onChange={(e)=>  dispatch(setCategory(e.target.value))}
                 className="border px-3 py-1 rounded"
             >
@@ -25,6 +45,8 @@ export default function Preferences() {
                 <option value="business">Business</option>
                 <option value="entertainment">Entertainment</option>
             </select>
+
+    */}
         </div>
 
     );

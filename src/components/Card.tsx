@@ -24,7 +24,7 @@ export default function Card({id, title, description, image, type}: Props) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
             <div className="absolute top-4 right-4 z-10">
-                 <Star onClick={handleFavorite}  className="w-6 h-6 cursor-pointer"/>
+                 <Star onClick={handleFavorite}  className="w-6 h-6 cursor-pointer white"/>
             </div>
 
            

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    category: "technology"
+    categories: [] as any
 };
 
 const preferenceSlice = createSlice({
@@ -10,7 +10,16 @@ const preferenceSlice = createSlice({
     initialState,
     reducers: {
         setCategory: (state, action) => {
-            state.category = action.payload;
+
+            const category = action.payload;
+
+            const exists = state.categories.includes(category);
+
+            if(exists){
+                state.categories = state.categories.filter((cat: any) => cat !== category);
+            } else {
+                state.categories.push(category);
+            }
         }
     }
 });

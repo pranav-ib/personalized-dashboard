@@ -17,7 +17,7 @@ export default function Feed() {
     const dispatch = useDispatch();
 
     const feed = useSelector((state: RootState) => state.feed.items);
-    const category = useSelector((state: RootState) => state.preferences.category);
+    const category = useSelector((state: RootState) => state.preferences.categories);
     const query = useSelector((state: RootState) => state.search.query);
     
     const testFeed = () =>{
@@ -28,7 +28,7 @@ export default function Feed() {
 
     useEffect(() => {
         loadContent();
-    }, []);
+    }, [category.join(",")]);
 
     const loadContent = async () => {
 

@@ -1,17 +1,20 @@
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 
-export const fetchNews = async (category : string) => {
+export const fetchNews = async (categories : string[]) => {
 
-  const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
-  );
-
-  const data = await res.json();
-
-  if (data.status !== "ok") {
-    console.error("News API error:", data);
-    return [];
+  if(!categories || categories.length === 0) {
+    categories = ["general"];
   }
+  const results = await Promise.all(
+    categories.map(async (category) =>{
+      const res = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+      );
 
-  return data.articles;
+      const data = await res.json();
+
+      return data.articles || [];
+    }) 
+  )
+  return results.flat();
 };
