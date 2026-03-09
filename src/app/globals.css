@@ -27,3 +27,7 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+.dark body {
+    @apply bg-gray-950 text-purple-900;
+}

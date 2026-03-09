@@ -5,6 +5,7 @@ import {RootState} from "../store/store";
 import {setQuery} from "../features/searchSlice";
 import {User} from "lucide-react";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar(){
 
@@ -16,6 +17,7 @@ export default function Navbar(){
             <h1 className="text-xl sm:text-2xl lg:text-3xl">My Dashboard</h1>
             
             <div className="flex items-center gap-3 sm:gap-6 w-full sm:w-auto">
+                <ThemeToggle />
                 <input type="text" placeholder="Search content..."
                     value={query}
                     onChange={(e)=> dispatch(setQuery(e.target.value))}
