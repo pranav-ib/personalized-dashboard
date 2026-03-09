@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const savedCategories = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("categories") || "[]") : [];
 
 const initialState = {
-    categories: [] as any
+    categories: savedCategories
 };
 
 const preferenceSlice = createSlice({
@@ -20,6 +21,8 @@ const preferenceSlice = createSlice({
             } else {
                 state.categories.push(category);
             }
+
+            localStorage.setItem("categories",JSON.stringify(state.categories));
         }
     }
 });

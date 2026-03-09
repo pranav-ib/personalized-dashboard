@@ -1,10 +1,16 @@
 import {createSlice,} from "@reduxjs/toolkit";
 
+const savedFavorites =
+  typeof window !== "undefined"
+    ? JSON.parse(localStorage.getItem("favorites") || "[]")
+    : [];
+
+const initialState = {
+    items: savedFavorites
+}
 const favoritesSlice = createSlice({
     name: "favorites",
-    initialState : {
-        items: [] as any[]
-    },
+    initialState,
     reducers: {
         addFavorite: (state, action) => {
             const exists = state.items.find((item: any) => item.id === action.payload.id);
