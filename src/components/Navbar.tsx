@@ -12,14 +12,14 @@ export default function Navbar(){
     const query = useSelector((state: RootState) => state.search.query);
 
     return(
-        <div className="sticky top-0 z-50 w-[60%] mx-auto mt-2 bg-white rounded-full shadow-md px-8 py-4 flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-purple-900">My Dashboard</h1>
+       <div className="sticky top-0 z-50 w-[95%] md:w-[80%] lg:w-[60%] mx-auto mt-2 bg-white rounded-full shadow-md px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between gap-3 flex-wrap">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl">My Dashboard</h1>
             
-            <div className="flex gap-6">
+            <div className="flex items-center gap-3 sm:gap-6 w-full sm:w-auto">
                 <input type="text" placeholder="Search content..."
                     value={query}
                     onChange={(e)=> dispatch(setQuery(e.target.value))}
-                    className="px-4 py-2 w-full sm:w-80 rounded-full border border-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                    className="px-4 py-2 w-full sm:w-72 md:w-80 rounded-full border border-gray-400 outline-none focus:ring-2 focus:ring-purple-400"
                 />
 
                 <Link href="/profile">
