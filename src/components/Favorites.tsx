@@ -15,7 +15,7 @@ export default function Favorites() {
 
             <div className="grid grid-cols-3 gap-10">
                 {favorites.map((item: any) => (
-                    <Card key={item.id} id={item.id} title={item.title} description={item.description} image={item.image} type={item.type} />
+                    <Card key={item.id} id={item.id} title={item.title} description={item.description} image={item.image} url={item.url} type={item.type} />
                 ))}
             </div>
         </div>

@@ -42,7 +42,9 @@ export default function Feed() {
             title: a.title,
             description: a.description,
             image: a.urlToImage,
-            type: 'news'
+            url: a.url,
+            type: 'news',
+            
         }));
 
         const formattedMovies = movies.map((a:any, index: number) => ({
@@ -50,6 +52,7 @@ export default function Feed() {
             title: a.title,
             description: a.overview,
             image: `https://image.tmdb.org/t/p/w500${a.poster_path}`,
+            url: `https://www.themoviedb.org/movie/${a.id}`,
             type: 'movie'
         }));
 
@@ -58,6 +61,7 @@ export default function Feed() {
             title: a.title,
             description: a.body,
             image: `https://via.placeholder.com/150`,
+            url: "#",
             type: 'social'
         })
         )
@@ -74,7 +78,7 @@ export default function Feed() {
 
             <div className="grid grid-cols-3 gap-10">
                 {filteredFeed.map((item: any) => (
-                    <Card key={item.id} id={item.id} title={item.title} description={item.description} image={item.image} type={item.type} />
+                    <Card key={item.id} id={item.id} title={item.title} description={item.description} image={item.image} url={item.url} type={item.type} />
                 ))}
             </div>
         </div>

@@ -17,12 +17,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html>
       <body className={poppins.className}>
         <ReduxProvider>
-
+                <Navbar />
           <div className="flex min-h-screen p-5">
             <Sidebar />
 
             <div className="flex-1 flex flex-col">
-                <Navbar />
+
                 
                 <main className="p-8">
                   {children}

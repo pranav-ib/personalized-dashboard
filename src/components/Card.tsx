@@ -9,9 +9,10 @@ type Props = {
     description?: string,
     image?: string,
     type?: string
+    url?:string
 }
 
-export default function Card({id, title, description, image, type}: Props) {
+export default function Card({id, title, description, image,url,  type}: Props) {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some((item: any) => item.id === id);
@@ -22,7 +23,7 @@ export default function Card({id, title, description, image, type}: Props) {
             dispatch( removeFavorite(id));
         }else{
             dispatch( addFavorite({
-                id, title, description, image, type
+                id, title, description, image, url, type
             }));
         }
     }
@@ -48,9 +49,13 @@ export default function Card({id, title, description, image, type}: Props) {
                 </p>
             
                 <div className="flex justify-between items-center mt-3">
-                    <button className="text-gray-400 hover:text-blue-300 text-sm font-medium transition-colors">
+                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-300 cursor-pointer text-sm font-medium transition-colors">
+                        {type=== "movies" ? "Play Now" : "Read More"}
+                    </a>
+
+                  {/*  <button className="text-gray-400 hover:text-blue-300 text-sm font-medium transition-colors">
                         Read More
-                    </button>
+                    </button> */}
 
                     {type && (
                         <span className="bg-white/10 border border-white/10 backdrop-blur-md px-3 py-1 text-[10px] uppercase tracking-wider font-semibold rounded-full">
