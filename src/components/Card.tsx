@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
-import { addFavorite } from "../features/favoriteSlice";
+import { useDispatch , useSelector} from "react-redux";
+import { RootState, AppDispatch} from "../store/store";
+import { addFavorite, removeFavorite } from "../features/favoriteSlice";
 import { Star } from "lucide-react";
 
 type Props = {
@@ -12,11 +13,18 @@ type Props = {
 
 export default function Card({id, title, description, image, type}: Props) {
     const dispatch = useDispatch();
-    
+    const favorites = useSelector((state: RootState) => state.favorites.items);
+    const isFavorite = favorites.some((item: any) => item.id === id);
+
     const handleFavorite = () => {
-        dispatch( addFavorite({
-            id, title, description, image, type
-        }));
+
+        if(isFavorite){
+            dispatch( removeFavorite(id));
+        }else{
+            dispatch( addFavorite({
+                id, title, description, image, type
+            }));
+        }
     }
     return (
         <div className="relative w-full max-w-xl h-80 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group">
@@ -24,7 +32,7 @@ export default function Card({id, title, description, image, type}: Props) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
             <div className="absolute top-4 right-4 z-10">
-                 <Star onClick={handleFavorite}  className="w-6 h-6 cursor-pointer white"/>
+                <Star onClick={handleFavorite} className={`w-6 h-6 cursor-pointer transition-colors ${isFavorite ? "fill-purple-600 text-purple-600" : "text-white"}  `}/>
             </div>
 
            
