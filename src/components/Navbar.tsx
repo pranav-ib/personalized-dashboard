@@ -19,7 +19,7 @@ export default function Navbar(){
                 <input type="text" placeholder="Search content..."
                     value={query}
                     onChange={(e)=> dispatch(setQuery(e.target.value))}
-                    className="px-5 py-2 rounded-full border border-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                    className="px-4 py-2 w-full sm:w-80 rounded-full border border-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
                 />
 
                 <Link href="/profile">

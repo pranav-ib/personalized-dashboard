@@ -28,7 +28,7 @@ export default function Card({id, title, description, image,url,  type}: Props) 
         }
     }
     return (
-        <div className="relative w-full max-w-xl h-80 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group">
+        <div className="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group">
             <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
