@@ -26,7 +26,7 @@ export default function Preferences() {
                             className={`px-4 py-2 rounded-full border transition
                             ${active
                             ? "bg-purple-600 text-white border-purple-600"
-                            : "bg-white hover:bg-gray-100"}
+                            : "bg-gray-200/20 hover:bg-purple-500"}
                         `}>
                             {cat}
                         </button>

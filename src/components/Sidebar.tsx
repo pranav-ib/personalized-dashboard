@@ -14,7 +14,7 @@ export default function Sidebar(){
     return(
 
          <aside className="w-56 sticky top-1/2 -translate-y-1/2 h-fit">
-            <div className="hidden md:block bg-gray-100 rounded-3xl shadow-md p-6 h-72 flex flex-col justify-center">
+            <div className="hidden md:block rounded-3xl shadow-md p-6 h-fit flex flex-col justify-center bg-gray-100 dark:bg-gray-100/10 backdrop-blur-md border border-white/20">
 
             <nav className="flex flex-col gap-3 font-medium">
 
