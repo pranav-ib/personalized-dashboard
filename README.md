@@ -1,3 +1,115 @@
+# Personalized Content Dashboard
+
+A responsive dashboard that aggregates content from multiple sources (News, Movies, Social posts) into a unified feed. Users can search, filter, reorder, and save content to personalize their experience.
+
+## Live Demo
+
+https://my-dashboard-ten-snowy.vercel.app
+
+## Features
+
+* **Unified Content Feed**
+
+  * Displays news, movie recommendations, and social posts in one dashboard.
+
+* **Search Functionality**
+
+  * Real-time search across titles and descriptions.
+
+* **User Preferences**
+
+  * Select preferred news categories to customize the feed.
+
+* **Favorites**
+
+  * Users can mark content as favorite and access it from the Favorites section.
+
+* **Drag-and-Drop**
+
+  * Reorder content cards interactively.
+
+* **Responsive Layout**
+
+  * Works across desktop, tablet, and mobile devices.
+
+* **Dark Mode**
+
+  * Theme switching between light and dark mode.
+
+* **Profile Page**
+
+  * Save user name and email using local storage.
+
+## Technologies Used
+
+* **Next.js**
+* **React**
+* **Redux Toolkit**
+* **Tailwind CSS**
+* **Framer Motion**
+* **NewsAPI**
+* **TMDB API**
+* **JSONPlaceholder API**
+
+## Project Structure
+
+```
+src/
+ ├── app/            # Next.js pages
+ ├── components/     # UI components (Navbar, Sidebar, Card, Feed)
+ ├── features/       # Redux slices
+ ├── services/       # API integrations
+ ├── hooks/          # Custom hooks
+ └── store/          # Redux store configuration
+```
+
+## APIs Used
+
+* News API – Fetch latest news articles
+* TMDB API – Movie recommendations
+* JSONPlaceholder – Mock social media posts
+
+## Installation
+
+Clone the repository:
+
+```
+git clone https://github.com/pranav-ib/personalized-dashboard
+```
+
+Navigate to the project folder:
+
+```
+cd personalized-dashboard
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run the development server:
+
+```
+npm run dev
+```
+
+Open in browser:
+
+```
+http://localhost:3000
+```
+
+## Environment Variables
+
+Create a `.env.local` file and add:
+
+```
+NEXT_PUBLIC_NEWS_API_KEY=your_news_api_key
+NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key
+```
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
